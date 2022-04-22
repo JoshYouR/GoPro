@@ -15,11 +15,6 @@ const filename = string => path.basename(string, path.extname(string));
 
 const replaceExt = ext => string => path.join(path.dirname(string), `${filename(string)}.${ext}`)
 
-const {input, output} = yargs.usage('extract-goprogpx [args]')
-.option('input', {alias: 'i', describe: 'Set the input file path', type: 'string', demandOption: true})
-.option('output', {alias: 'o', describe: 'Set the output file path. Don\'t include extension. Defaults to name of input file.', type: 'string'})
-.argv;
-
 const goproTelemetry = options => data => new Promise((res, rej) => _goproTelemetry(data, options, telemetry => res(telemetry)));
 
 const writeFile = path => data => _writeFile(path, data);
@@ -66,11 +61,20 @@ const createGPSBinary = url => async ({index, id}) => {
                     ).then(() => ({rawData: buff}));
 };
 
-const run = inputPath => outputPath => pipeP([
+const run = outputFormat => inputPath => (outputPath = `${filename(inputPath)}.${outputFormat}`) => (name = filename(inputPath)) => pipeP([
     getGpmdStreamIndex,
     createGPSBinary(inputPath),
-    goproTelemetry({preset: 'gpx', GPS5Fix: 2}),
-    writeFile(`${outputPath || path.basename(inputPath, path.extname(inputPath))}.gpx`)
+    goproTelemetry({preset: outputFormat, GPS5Fix: 2, name}),
+    telem => Promise.resolve(JSON.stringify(telem)),
+    writeFile(outputPath)
 ])(inputPath);
 
-run(path.extname(input) === '' ? replaceExt('mp4')(input) : input)(output);
+const {input, output, format, name} = yargs.usage('extract-goprodata [args]')
+.option('input', {alias: 'i', describe: 'Set the input file path', type: 'string', demandOption: true})
+.coerce('input', input => path.extname(input) === '' ? replaceExt('mp4')(input) : input)
+.option('output', {alias: 'o', describe: 'Set the output file path.\nDon\'t include extension.\nDefaults to name of input file.', type: 'string'})
+.option('format', {alias: 'f', describe: 'Set the telemetry output format.\nFormats can be any of those found at JuanIrache/gopro-telemetry.\nDefaults to GPX.\nReturns a JSON formatted document if specified format is not valid.', default: 'gpx', type: 'string'})
+.option('name', {alias: 'n', describe: 'Sets the name in GPX files.\nDefaults to output file name.', type: 'string'})
+.argv;
+
+run(format)(input)(output)(name);

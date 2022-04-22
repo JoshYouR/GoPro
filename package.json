@@ -5,12 +5,12 @@
     "gopro-telemetry": "^1.1.37",
     "yargs": "^17.4.1"
   },
-  "name": "extract-goprogpx",
+  "name": "extract-goprodata",
   "version": "1.0.0",
   "description": "A command line utility to extract the GPX data from a GoPro video, when the GoPro has GPS ability.",
   "main": "bin/index.js",
   "bin": {
-    "extract-goprogpx": "./bin/index.js"
+    "extract-goprodata": "./bin/index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
