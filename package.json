@@ -16,5 +16,14 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Joshua Amsler",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoshYouR/extract-goprodata.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JoshYouR/extract-goprodata/issues"
+  },
+  "homepage": "https://github.com/JoshYouR/extract-goprodata#readme"
 }
