@@ -5,14 +5,19 @@ const ffprobe = require('ffprobe-client');
 const _goproTelemetry = require('gopro-telemetry');
 const {writeFile: _writeFile} = require('fs/promises');
 const yargs = require('yargs');
+const path = require('path');
 
 const pipe = fns => x => fns.reduce((f, g) => g(f), x);
 
 const get = string => object => object[string];
 
+const filename = string => path.basename(string, path.extname(string));
+
+const replaceExt = ext => string => path.join(path.dirname(string), `${filename(string)}.${ext}`)
+
 const {input, output} = yargs.usage('extract-goprogpx [args]')
 .option('input', {alias: 'i', describe: 'Set the input file path', type: 'string', demandOption: true})
-.option('output', {alias: 'o', describe: 'Set the output file path. Don\' include extension.', type: 'string', demandOption: true})
+.option('output', {alias: 'o', describe: 'Set the output file path. Don\'t include extension. Defaults to name of input file.', type: 'string'})
 .argv;
 
 const goproTelemetry = options => data => new Promise((res, rej) => _goproTelemetry(data, options, telemetry => res(telemetry)));
@@ -37,6 +42,7 @@ const getId = pipe([
 ]);
 
 const find = predicate => array => array.find(predicate);
+
 
 const isGpmdStream = stream => getCodecTagString(stream) === 'gpmd';
 
@@ -63,8 +69,8 @@ const createGPSBinary = url => async ({index, id}) => {
 const run = inputPath => outputPath => pipeP([
     getGpmdStreamIndex,
     createGPSBinary(inputPath),
-    goproTelemetry({preset: 'gpx'}),
-    writeFile(`${outputPath}.gpx`)
+    goproTelemetry({preset: 'gpx', GPS5Fix: 2}),
+    writeFile(`${outputPath || path.basename(inputPath, path.extname(inputPath))}.gpx`)
 ])(inputPath);
 
-run(input)(output);
+run(path.extname(input) === '' ? replaceExt('mp4')(input) : input)(output);
