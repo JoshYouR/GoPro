@@ -8,7 +8,7 @@ Global installation is necessary for the CLI to be used in any directory in the 
 In terminal shell, use `extract-goprogpx -input [path/to/video-name] -output [path/to/file-name]`.
 
 Alternatively, use `-i` instead of `-input`, `-o` instead of `-output`.
-> Don't add the extension to the `-output` name.
+> Don't add the file extension to the `-output` name.
 
 ### Credit
 - ffmpeg
