@@ -3,7 +3,7 @@
     "ffprobe-client": "^1.1.6",
     "fluent-ffmpeg": "^2.1.2",
     "gopro-telemetry": "^1.1.37",
-    "yargs": "^17.5.0"
+    "yargs": "^17.5.1"
   },
   "name": "extract-goprodata",
   "version": "1.0.1",
