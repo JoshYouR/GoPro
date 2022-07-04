@@ -6,7 +6,7 @@
     "yargs": "^17.5.1"
   },
   "name": "extract-goprodata",
-  "version": "1.0.2",
+  "version": "1.0.1",
   "description": "A command line utility to extract the meta data from a GoPro video.",
   "main": "bin/index.js",
   "bin": {
