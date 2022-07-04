@@ -74,7 +74,7 @@ const {input, output, format, name} = yargs.usage('extract-goprodata [args]')
 .coerce('input', input => path.extname(input) === '' ? replaceExt('mp4')(input) : input)
 .option('output', {alias: 'o', describe: 'Set the output file path.\nDon\'t include extension.\nDefaults to name of input file.', type: 'string'})
 .option('format', {alias: 'f', describe: 'Set the telemetry output format.\nFormats can be any of those found at JuanIrache/gopro-telemetry.\nDefaults to GPX.\nReturns a JSON formatted document if specified format is not valid.', default: 'gpx', type: 'string'})
-.option('name', {alias: 'n', describe: 'Sets the name in GPX files.\nDefaults to output file name.', type: 'string'})
+.option('name', {alias: 'n', describe: 'Sets the name in GPX files.\nDefaults to input file name.', type: 'string'})
 .argv;
 
 run(format)(input)(output)(name);

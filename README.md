@@ -8,16 +8,18 @@ path to the ffmpeg and ffprobe executables.
 They can be found on [ffmpeg's downloads page](https://ffmpeg.org/download.html).
 
 ### Installation
-Install with `npm -i -g extract-goprodata`.
+Install with `npm i -g extract-goprodata`.
 
 Global installation is necessary for the CLI to be used in any directory in the terminal.
 
 ### Usage
-In terminal shell, use `extract-goprodata -input path/to/video-name [-format output-format] [-output path/to/file-name]`.
+In terminal shell, use `extract-goprodata -input path/to/video-name [-format output-format] [-name name-within-gpx-file] [-output path/to/file-name]`.
 
-Alternatively, use `-i` instead of `-input`, `-f` instead of `-format`, `-o` instead of `-output`.
+Alternatively, use `-i` instead of `-input`, `-f` instead of `-format`, `-n` instead of `-name`, `-o` instead of `-output`.
 
-`-format` defaults to `gpx` if not set. `-output` defaults to the name of the input file if not set.
+`-format` defaults to `gpx`. `-output` defaults to the name of the input file. `-name` defaults to input file name.
+
+Only some file formats include the `-name` string within the file, eg gpx.
 
 > Don't add the file extension to the `-output` name.
 
