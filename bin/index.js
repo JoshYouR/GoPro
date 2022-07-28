@@ -61,11 +61,15 @@ const createGPSBinary = url => async ({index, id}) => {
                     ).then(() => ({rawData: buff}));
 };
 
+const isAlreadyFormatted = x => ['gpx', 'kml', 'virb'].includes(x);
+
+const formatForOutput = outputFormat => telem => isAlreadyFormatted(outputFormat) ? telem.toString() : Promise.resolve(JSON.stringify(telem));
+
 const run = outputFormat => inputPath => (outputPath = `${filename(inputPath)}.${outputFormat}`) => (name = filename(inputPath)) => pipeP([
     getGpmdStreamIndex,
     createGPSBinary(inputPath),
     goproTelemetry({preset: outputFormat, GPS5Fix: 2, name}),
-    telem => Promise.resolve(JSON.stringify(telem)),
+    formatForOutput(outputFormat),
     writeFile(outputPath)
 ])(inputPath);
 
