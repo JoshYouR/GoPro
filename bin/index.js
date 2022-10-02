@@ -61,7 +61,7 @@ const run = outputFormat => inputPath => (outputPath = `${filename(inputPath)}.$
     goproTelemetry({preset: outputFormat, GPS5Fix: 2, name}),
     formatForOutput(outputFormat),
     writeFile(outputPath)
-])(inputPath).catch(console.error);
+])(inputPath).catch(e => console.error(e.message));
 
 const {input, output, format, name} = yargs.usage('extract-goprodata [args]')
 .option('input', {alias: 'i', describe: 'Set the input file path', type: 'string', demandOption: true})
