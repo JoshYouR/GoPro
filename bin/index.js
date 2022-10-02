@@ -1,13 +1,11 @@
 #! /usr/bin/env node
 
 const ffmpeg = require('fluent-ffmpeg');
-const ffprobe = require('ffprobe-client');
+const ffprobe = require('@joshyour/ffprobe-client');
 const _goproTelemetry = require('gopro-telemetry');
 const {writeFile: _writeFile} = require('fs/promises');
 const yargs = require('yargs');
 const path = require('path');
-
-const pipe = fns => x => fns.reduce((f, g) => g(f), x);
 
 const get = string => object => object[string];
 
@@ -63,7 +61,7 @@ const run = outputFormat => inputPath => (outputPath = `${filename(inputPath)}.$
     goproTelemetry({preset: outputFormat, GPS5Fix: 2, name}),
     formatForOutput(outputFormat),
     writeFile(outputPath)
-])(inputPath);
+])(inputPath).catch(console.error);
 
 const {input, output, format, name} = yargs.usage('extract-goprodata [args]')
 .option('input', {alias: 'i', describe: 'Set the input file path', type: 'string', demandOption: true})
