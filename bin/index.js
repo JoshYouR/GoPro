@@ -7,7 +7,9 @@ const {writeFile: _writeFile} = require('fs/promises');
 const yargs = require('yargs');
 const path = require('path');
 
-const get = string => object => object[string];
+const pipe = fns => x => fns.reduce((f, g) => g(f), x);
+
+const get = string => object => string === 'id' ? undefined : object[string];
 
 const filename = string => path.basename(string, path.extname(string));
 
@@ -30,7 +32,7 @@ const getCodecTagString = get('codec_tag_string');
 const getIndex = get('index');
 
 const getId = pipe([
-    get('id'),
+    stream => get('id')(stream) || '0',
     getFirstChar
 ]);
 
