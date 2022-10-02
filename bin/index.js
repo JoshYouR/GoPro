@@ -21,20 +21,12 @@ const writeFile = path => data => _writeFile(path, data);
 
 const pipeP = promises => x => promises.reduce((f, g) => f.then(g), Promise.resolve(x));
 
-const getCharAtIndex = index => string => string.charAt(index);
-
-const getFirstChar = getCharAtIndex(0);
 
 const getStreams = get('streams');
 
 const getCodecTagString = get('codec_tag_string');
 
 const getIndex = get('index');
-
-const getId = pipe([
-    get('id'),
-    getFirstChar
-]);
 
 const find = predicate => array => array.find(predicate);
 
@@ -47,7 +39,7 @@ const getGpmdStreamIndex = url => pipeP([
     ffprobe,
     getStreams,
     findGoProMetaDataStream,
-    stream => ({index: getIndex(stream), id: getId(stream)})
+    stream => ({index: getIndex(stream), id: 0})
 ])(url);
 
 const createGPSBinary = url => async ({index, id}) => {
