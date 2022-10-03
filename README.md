@@ -13,15 +13,15 @@ Install with `npm i -g extract-goprodata`.
 Global installation is necessary for the CLI to be used in any directory in the terminal.
 
 ### Usage
-In terminal shell, use `extract-goprodata -input path/to/video-name [-format output-format] [-name name-within-gpx-file] [-output path/to/file-name]`.
+In terminal shell, use `extract-goprodata --input path/to/video-name [--format output-format] [--name name-within-gpx-file] [--output path/to/file-name]`.
 
-Alternatively, use `-i` instead of `-input`, `-f` instead of `-format`, `-n` instead of `-name`, `-o` instead of `-output`.
+Alternatively, use `-i` instead of `--input`, `-f` instead of `--format`, `-n` instead of `--name`, `-o` instead of `--output`.
 
-`-format` defaults to `gpx`. `-output` defaults to the name of the input file. `-name` defaults to input file name.
+`--format` defaults to `gpx`. `--output` defaults to the name of the input file. `--name` defaults to input file name.
 
-Only some file formats include the `-name` string within the file, eg gpx.
+Only some file formats include the `--name` string within the file, eg gpx.
 
-> Don't add the file extension to the `-output` name.
+> Don't add the file extension to the `--output` name.
 
 If your GPX file contains no points, it is likely that the camera did not have a GPS lock when you started recording. 
 GPX points are only recorded if the device has a GPS lock, which can take a minute or longer on device start up.
