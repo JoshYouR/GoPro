@@ -15,9 +15,18 @@ Global installation is necessary for the CLI to be used in any directory in the 
 ### Usage
 In terminal shell, use `extract-goprodata --input path/to/video-name [--format output-format] [--name name-within-gpx-file] [--output path/to/file-name]`.
 
-Alternatively, use `-i` instead of `--input`, `-f` instead of `--format`, `-n` instead of `--name`, `-o` instead of `--output`.
+Telemetry output format:
+Formats can be any of those found at [JuanIrache/gopro-telemetry](https://github.com/JuanIrache/gopro-telemetry#presets). Returns a JSON formatted document if specified format is not valid.
 
-`--format` defaults to `gpx`. `--output` defaults to the name of the input file. `--name` defaults to input file name.
+Alternatively, use:
+- `-i` instead of `--input`
+- `-f` instead of `--format`
+- `-n` instead of `--name`
+- `-o` instead of `--output`
+
+- `--format` defaults to `gpx`.
+- `--output` defaults to the name of the input file, using the format for the extension.
+- `--name` defaults to input file name.
 
 Only some file formats include the `--name` string within the file, eg gpx.
 
