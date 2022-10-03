@@ -24,6 +24,7 @@ Alternatively, use:
 - `-n` instead of `--name`
 - `-o` instead of `--output`
 
+
 - `--format` defaults to `gpx`.
 - `--output` defaults to the name of the input file, using the format for the extension.
 - `--name` defaults to input file name.
