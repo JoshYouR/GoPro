@@ -9,7 +9,7 @@ const path = require('path');
 
 const pipe = fns => x => fns.reduce((f, g) => g(f), x);
 
-const get = string => object => string === 'id' ? undefined : object[string];
+const get = string => object => object[string];
 
 const filename = string => path.basename(string, path.extname(string));
 
