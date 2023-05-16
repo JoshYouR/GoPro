@@ -2,8 +2,8 @@
   "dependencies": {
     "@joshyour/ffprobe-client": "^1.1.7",
     "fluent-ffmpeg": "^2.1.2",
-    "gopro-telemetry": "^1.1.41",
-    "yargs": "^17.7.0"
+    "yargs": "^17.7.0",
+    "gopro-telemetry": "^1.2.0"
   },
   "name": "extract-goprodata",
   "version": "1.0.13",
